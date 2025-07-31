@@ -54,7 +54,10 @@ i{
     margin-top: 1.5rem;
 }
 .mssg{
-    margin:2rem 0 2rem 0
+    margin:2rem 0 2rem 0;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 0.5rem;
 }
 button{
     height: 3rem;
@@ -72,4 +75,11 @@ button:active{
 button:hover{
     filter: drop-shadow(0 0 7px black);
     /* transition: all 2s ease-in; */
+}
+.main{
+    text-align: center;
+    margin-top: -3rem;
+    margin-bottom: 2rem;
+    font-family: "Rock Salt", cursive;
+    font-size: 1.2rem;
 }
