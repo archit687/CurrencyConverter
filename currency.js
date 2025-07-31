@@ -1,5 +1,4 @@
-// let BASE_URL = "https://2024-03-06.currency-api.pages.dev/v1/currencies/eur.json";
-let BASE_URL = "https://2024-03-06.currency-api.pages.dev/v1/currencies";
+let BASE_URL = "https://api.exchangerate-api.com/v4/latest/";
 
 const c = document.querySelectorAll(".selectT select");
 const btn = document.querySelector('button');
@@ -36,27 +35,6 @@ const update = (element) => {
     img.src = newsrc;
 }
 
-
-// btn.addEventListener('click', async (evt)=>{
-//     evt.preventDefault()
-//     let amt=document.querySelector('input');
-//     let amount=amt.value;
-//     console.log(amount);
-//     if(amount===""|| amount<1){
-//         amount=1;
-//         amt.value='1';
-//     }
-//     // console.log(from_curr.value,to_curr.value);
-//     const URL=`${BASE_URL}/${from_curr.value.toLowerCase()}/${to_curr.value.toLowerCase()}.json`;
-//     let response=await fetch(URL);
-//     let data= await response.json();
-//     let rate = data[to_curr.value.toLowerCase()];
-//     let finalamt=amount*rate;
-//     mssg.innerText= `${amt}${from_curr.value} = ${finalamt}${to_curr.value}`;
-
-
-// });
-
 btn.addEventListener('click', async (evt) => {
     evt.preventDefault();
 
@@ -68,26 +46,22 @@ btn.addEventListener('click', async (evt) => {
         amt.value = '1';
     }
 
-    const from = from_curr.value.toLowerCase();
-    const to = to_curr.value.toLowerCase();
+    const from = from_curr.value;  // No .toLowerCase()
+    const to = to_curr.value;
 
-    const URL = `${BASE_URL}/${from}.json`;
+    // const URL = `https://api.exchangerate-api.com/v4/latest/${from}`;
+    let URL = `${BASE_URL}${from}`;
 
     try {
         let response = await fetch(URL);
         let data = await response.json();
 
-        // rate will be like data[from][to]
-        let rate = data[from][to];
+        let rate = data.rates[to];  // ✅ Use .rates[to]
         let finalamt = amount * rate;
 
-        mssg.innerText = `${amount} ${from_curr.value} = ${finalamt.toFixed(2)} ${to_curr.value}`;
+        mssg.innerText = `${amount} ${from} = ${finalamt.toFixed(2)} ${to}`;
     } catch (error) {
         console.error("Error fetching rate:", error);
         mssg.innerText = "Something went wrong!";
     }
 });
-
-
-
-
