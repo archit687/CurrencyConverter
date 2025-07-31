@@ -64,3 +64,12 @@ button{
     font-size: 1.05rem;
     cursor: pointer;
 }
+button:active{
+     transition: all 0.5s ease-out;
+     scale: 1.05;
+
+}
+button:hover{
+    filter: drop-shadow(0 0 7px black);
+    /* transition: all 2s ease-in; */
+}
